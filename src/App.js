@@ -24,8 +24,7 @@ function App() {
     <main className="w-full h-screen  bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700">
 		<div className='w-full h-screen bg-gray-900/30 text-white p-10'>
 			<header>
-				<div className='flex justify-between'>
-
+				<div className='flex justify-between items-center'>
 				<h1 className='text-3xl font-bold'>melon playground 🍉 </h1>
 				<button className='p-4 bg-black/50 rounded-xl hover:text-pink-500' onClick={onRunCode}>
 					<FontAwesomeIcon icon={faPlay} size='xl' />
@@ -34,9 +33,9 @@ function App() {
 			</header>
 			
 			<div className='rounded-xl bg-black/50 p-2 mt-4'>
-			<Editor className="opacity-1 " height="70vh" defaultLanguage="javascript" defaultValue="// some comment" theme="vs-dark"
+			<Editor className="opacity-1 " height="70vh" defaultLanguage="javascript" defaultValue={'let i = number(input(\"Enter a number \"));\n\nprint(i + 42);'} theme="vs-dark"
 				options={{
-					fontSize: 20,
+					fontSize: 16,
 				}}
 				onMount={onEditorMount}
 			/>
