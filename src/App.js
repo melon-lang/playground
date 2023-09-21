@@ -1,24 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
+import Editor from '@monaco-editor/react';
+import { FontAwesomeIcon,  } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { useRef } from 'react';
+
+
 
 function App() {
+	const editor = useRef();
+
+	function onRunCode() {
+		const code = editor.current.getValue();
+		const xCallbackURL = "shortcuts://x-callback-url/run-shortcut?name=melon&input="
+
+		window.location.href =  xCallbackURL + encodeURIComponent(code);
+	}
+
+	function onEditorMount(editor_, monaco) {
+		editor.current = editor_;
+	  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="w-full h-screen  bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700">
+		<div className='w-full h-screen bg-gray-900/30 text-white p-10'>
+			<header>
+				<div className='flex justify-between'>
+
+				<h1 className='text-3xl font-bold'>melon playground 🍉 </h1>
+				<button className='p-4 bg-black/50 rounded-xl hover:text-pink-500' onClick={onRunCode}>
+					<FontAwesomeIcon icon={faPlay} size='xl' />
+				</button>
+				</div>
+			</header>
+			
+			<div className='rounded-xl bg-black/50 p-2 mt-4'>
+			<Editor className="opacity-1 " height="70vh" defaultLanguage="javascript" defaultValue="// some comment" theme="vs-dark"
+				options={{
+					fontSize: 20,
+				}}
+				onMount={onEditorMount}
+			/>
+			</div>
+
+		</div>
+	</main>
   );
 }
 
